@@ -312,11 +312,18 @@ han: false
 # Duoshuo ShortName
 #duoshuo_shortname:
 
-# Disqus
+# disqus
 disqus:
   enable: true
-  shortname: louis_liu
+  shortname: louisliu813
   count: true
+
+# disqus
+url: http://springmarch.com
+root: /
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+
 
 # Hypercomments
 #hypercomments_id:
@@ -631,4 +638,4 @@ js: js
 images: images
 
 # Theme version
-version: 5.1.1
+version: 5.1.2

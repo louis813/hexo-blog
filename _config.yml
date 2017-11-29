@@ -72,8 +72,3 @@ deploy:
     repo: git@47.52.95.8:/home/git/hexo_blog.git
     branch: master           
     message: 提交的信息 
-
-disqus:
-  enable: true
-  shortname: louis_liu
-  count: true
