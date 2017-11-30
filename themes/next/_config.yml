@@ -316,7 +316,7 @@ han: false
 disqus:
   enable: true
   shortname: louisliu813
-  count: true
+  count: false
 
 # disqus
 url: http://springmarch.com
