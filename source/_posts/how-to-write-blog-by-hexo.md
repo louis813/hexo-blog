@@ -16,15 +16,15 @@ node 环境 [node dmg](https://nodejs.org/en/download/)
 
 markdown 编辑器 [macdown](https://macdown.uranusjr.com/)
 
-![macdown](https://macdown.uranusjr.com/static/images/macdown-demo.png){:height="50%" width="50%"}
+![macdown](https://macdown.uranusjr.com/static/images/macdown-demo.png = 100x20)
 
 屏幕 gif 录制 [gifox](https://gifox.io/)
 
-![gofix](https://gifox.io/image/free-selection@2x.jpg){:height="50%" width="50%"}
+![gofix](https://gifox.io/image/free-selection@2x.jpg = 100x20)
 
 屏幕 video 录制 [screenflow](https://www.telestream.net/screenflow/)
 
-![screenflow](http://soft.macx.cn/upload/softicon1/201211301376.jpg){:height="50%" width="50%"}
+![screenflow](http://soft.macx.cn/upload/softicon1/201211301376.jpg = 100x20)
 
 服务器 [阿里云](https://www.aliyun.com/product/ecs) 或 [aws](https://aws.amazon.com/ecs)
 
