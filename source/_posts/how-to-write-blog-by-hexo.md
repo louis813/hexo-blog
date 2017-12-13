@@ -164,10 +164,34 @@ deploy:
 
 其中，repo 中的 xx.xx.xx.xx 为服务器公网 ip，/opt/www/hexo_blog 为上传博客静态资源的路径。
 
+提交更新到 github 仓库:
 
+```
+louis@mac ~/hexo-blog git commit -am "upate header"
+...
+ 
+louis@mac ~/hexo-blog master git push origin master
+...
+```
+   
+部署到服务器 
 
-具体请参考 [hexo deployment](https://hexo.io/docs/deployment.html)
+```
+louis@mac  ~/workspace/personal/hexo-blog hexo deploy
+INFO  Deploying: git
+INFO  Clearing .deploy_git folder...
+INFO  Copying files from public folder...
+INFO  Copying files from extend dirs...
+On branch master
+nothing to commit, working tree clean
+Everything up-to-date
+Branch master set up to track remote branch master from git@47.52.95.8:/home/git/hexo_blog.git.
+INFO  Deploy done: git
+```
+
+完毕，这时候博客文章就发表出去了。
+
 
 # 其他
 
-文章，少用图片，第一是编写不顺畅，第二是图片的大小是个问题，以后的文章，就直接用外链，或者直接不用图片。
+文章，少用图片，第一编写不顺畅，第二图片大小是个问题，可以用外链或者不用图片描述问题。大家有更方便的流程可以留言告知。
