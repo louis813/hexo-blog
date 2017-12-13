@@ -1,7 +1,8 @@
 ---
 title: 优雅地写技术博客
 date: 2017-12-13 15:39:35
-tags: writing
+tags:
+- writing
 ---
 
 # 前言
