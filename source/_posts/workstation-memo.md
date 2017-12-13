@@ -1,5 +1,5 @@
 ---
-title: workstation-memo
+title: macos 工作站环境 搭建备忘录
 date: 2017-12-13 11:21:02
 tags:
 ---
