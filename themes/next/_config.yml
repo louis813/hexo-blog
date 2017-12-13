@@ -637,5 +637,8 @@ css: css
 js: js
 images: images
 
+# 保存图片：https://github.com/CodeFalling/hexo-asset-image
+post_asset_folder: true
+
 # Theme version
 version: 5.1.2
