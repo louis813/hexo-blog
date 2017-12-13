@@ -16,13 +16,15 @@ node 环境 [node dmg](https://nodejs.org/en/download/)
 
 markdown 编辑器 [macdown](https://macdown.uranusjr.com/)
 
+![macdown](https://macdown.uranusjr.com/static/images/macdown-demo.png){:height="50%" width="50%"}
+
 屏幕 gif 录制 [gifox](https://gifox.io/)
 
-![gofix](show_gofix.gif)
+![gofix](https://gifox.io/image/free-selection@2x.jpg){:height="50%" width="50%"}
 
 屏幕 video 录制 [screenflow](https://www.telestream.net/screenflow/)
 
-![screenflow](screenflow.gif)
+![screenflow](http://soft.macx.cn/upload/softicon1/201211301376.jpg){:height="50%" width="50%"}
 
 服务器 [阿里云](https://www.aliyun.com/product/ecs) 或 [aws](https://aws.amazon.com/ecs)
 
@@ -69,11 +71,21 @@ hexo server
 	
 记住 自己博客网站在 disque 的 shortname，一般在这里能看到：
 
-![disque](disque.jpg)
-
 在 hexo 项目中的主题 config.yml 进行 disque 的相应配置：
 
-![disque_config](disque_hexo_config.jpg)
+```
+# disqus
+disqus:
+  enable: true
+  shortname: springmarchcom
+  count: false
+
+# disqus
+url: http://springmarch.com
+root: /
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+```
 
 ## 图片
 
@@ -194,4 +206,6 @@ INFO  Deploy done: git
 
 # 其他
 
-文章，少用图片，第一编写不顺畅，第二图片大小是个问题，可以用外链或者不用图片描述问题。大家有更方便的流程可以留言告知。
+文章，少用图片，第一编写不顺畅，第二图片大小是个问题，可以用外链或者不用图片描述问题。大家有更方便的流程可以留言告知。（例如能将 gif 进行压缩的免费图床）
+
+发现图片加载慢时，会影响 js 对 markdown 片段的呈现，用了[图片懒加载](https://www.npmjs.com/package/hexo-lazyload-image)，暂时除了美观度和并发加载数只有3个不满外，还能接受。
