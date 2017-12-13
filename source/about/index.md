@@ -12,4 +12,4 @@ date: 2017-06-27 01:42:10
 Exchange and discuss，to be a better man.
 
 
-**链接:** [github](https://github.com/louis813), [twitter](https://twitter.com/et8611), <louisliu813@gmail.com> 
+**链接:** [github](https://github.com/louis813), [twitter](https://twitter.com/et861), <louisliu813@gmail.com> 
