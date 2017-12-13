@@ -4,13 +4,13 @@ date: 2017-12-13 15:39:35
 tags: writing
 ---
 
-#前言
+# 前言
 
 写技术博客，很简单，难在坚持 :)
 
 整体来说，写技术博客，只需要，基本的 markdown 语法，一个合适的博客框架，一台服务器，一个公网 IP，一个域名，一个社交评论账号。就是这么简单。
 
-#准备
+# 准备
 
 node 环境 [node dmg](https://nodejs.org/en/download/)
 
@@ -62,7 +62,7 @@ hexo generate
 hexo server
 ```
 	
-##评论
+## 评论
 
 
 注册 [disque](https://disqus.com/) （注意，使用 disque 需要 FTW）
@@ -75,7 +75,7 @@ hexo server
 
 ![disque_config](disque_hexo_config.jpg)
 
-##图片
+## 图片
 
 安装图片组件
 
@@ -110,7 +110,7 @@ louis@mac ~/workspace/personal/hexo-blog/source/_posts tree -L 2
 
 具体参考 [CodeFalling/hexo-asset-image](https://github.com/CodeFalling/hexo-asset-image)
 
-##服务器与域名
+## 服务器与域名
 
 域名可以在 godaddy 购买。
 
@@ -144,7 +144,7 @@ server
 }
 ```
 
-##部署
+## 部署
 
 添加部署组件
 
@@ -168,9 +168,6 @@ deploy:
 
 具体请参考 [hexo deployment](https://hexo.io/docs/deployment.html)
 
-# 总体效果
+# 其他
 
-
-	简单展示：
-		创建文章；
-		写标题，写段落，写内容，添加gif，部署，查看新文章, 评论，动态图
+文章，少用图片，第一是编写不顺畅，第二是图片的大小是个问题，以后的文章，就直接用外链，或者直接不用图片。
