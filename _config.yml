@@ -67,10 +67,10 @@ theme: next
 
 # Image Lazy Load 
 # https://www.npmjs.com/package/hexo-lazyload-image
-lazyload:
-  enable: true 
-  onlypost: false
-  loadingImg: 
+# lazyload:
+#   enable: true 
+#   onlypost: false
+#   loadingImg: 
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
