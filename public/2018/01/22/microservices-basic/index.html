@@ -1,0 +1,783 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="microservices,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="介绍微服务架构是将单一应用划分成一组小服务的开发模式，每个服务运行在它自己的进程上，彼此间用轻量级协议进行通信，例如 HTTP Restful API。这些服务是围绕业务能力构建的，通过自动部署机制进行独立部署。这里有最低限度的集中管理来控制服务，即使服务使用不同的编程语言和不同的数据存储技术。 特征服务组件化传统实现组件的方式是通过库，传统组件和应用一起运行在进程中，组件的局部变化意味着整个应用">
+<meta name="keywords" content="microservices">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微服务 - 概念">
+<meta property="og:url" content="http://springmarch.com/2018/01/22/microservices-basic/index.html">
+<meta property="og:site_name" content="阳春三月">
+<meta property="og:description" content="介绍微服务架构是将单一应用划分成一组小服务的开发模式，每个服务运行在它自己的进程上，彼此间用轻量级协议进行通信，例如 HTTP Restful API。这些服务是围绕业务能力构建的，通过自动部署机制进行独立部署。这里有最低限度的集中管理来控制服务，即使服务使用不同的编程语言和不同的数据存储技术。 特征服务组件化传统实现组件的方式是通过库，传统组件和应用一起运行在进程中，组件的局部变化意味着整个应用">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://martinfowler.com/articles/microservices/images/conways-law.png">
+<meta property="og:image" content="https://martinfowler.com/articles/microservices/images/PreferFunctionalStaffOrganization.png">
+<meta property="og:updated_time" content="2018-10-06T06:59:39.189Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微服务 - 概念">
+<meta name="twitter:description" content="介绍微服务架构是将单一应用划分成一组小服务的开发模式，每个服务运行在它自己的进程上，彼此间用轻量级协议进行通信，例如 HTTP Restful API。这些服务是围绕业务能力构建的，通过自动部署机制进行独立部署。这里有最低限度的集中管理来控制服务，即使服务使用不同的编程语言和不同的数据存储技术。 特征服务组件化传统实现组件的方式是通过库，传统组件和应用一起运行在进程中，组件的局部变化意味着整个应用">
+<meta name="twitter:image" content="https://martinfowler.com/articles/microservices/images/conways-law.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://springmarch.com/2018/01/22/microservices-basic/">
+
+
+
+
+
+  <title>微服务 - 概念 | 阳春三月</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">阳春三月</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">louisliu813</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://springmarch.com/2018/01/22/microservices-basic/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Louis Liu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/1199714?v=3&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阳春三月">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">微服务 - 概念</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-22T15:17:36+08:00">
+                2018-01-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>微服务架构是将单一应用划分成一组小服务的开发模式，每个服务运行在它自己的进程上，彼此间用轻量级协议进行通信，例如 HTTP Restful API。这些服务是围绕业务能力构建的，通过自动部署机制进行独立部署。这里有最低限度的集中管理来控制服务，即使服务使用不同的编程语言和不同的数据存储技术。</p>
+<h1 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h1><h2 id="服务组件化"><a href="#服务组件化" class="headerlink" title="服务组件化"></a>服务组件化</h2><p>传统实现组件的方式是通过库，传统组件和应用一起运行在进程中，组件的局部变化意味着整个应用的重新部署。 </p>
+<p>通过服务来实现组件，意味着将应用拆散为一系列的服务运行在不同的进程中，那么单一服务的局部变化只需重新部署对应的服务进程。另外将服务作为组件可以更明确的定义出组件的边界，因为服务之间的调用是跨进程的，清晰的边界和职责定义是设计时必须考虑的。</p>
+<p>服务组件化，可能比远程调用和进程内调用代价更大，但可以选择将关联性比较大的服务部署在同个宿主环境。</p>
+<h2 id="组织架构围绕业务"><a href="#组织架构围绕业务" class="headerlink" title="组织架构围绕业务"></a>组织架构围绕业务</h2><p>信息技术的著名康威定律：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">任何组织在设计系统时，这系统的结构也自然地从组织的沟通架构复刻而来。</span><br></pre></td></tr></table></figure>
+<p>单体应用拆分时，因为关注于技术层面，所以会分为UI 团队，服务端逻辑团队，数据库团队。当团队按技术线进行划分时，简单修改会导致跨组的沟通成本和预算审批。</p>
+<p><img src="https://martinfowler.com/articles/microservices/images/conways-law.png" alt="monolithic"></p>
+<p>微服务按业务能力拆分。这个团队将负责实现服务的全部任务，包括用户交互，服务端逻辑，持久化数据，对外沟通，这个团队是跨职能的，完整覆盖完成业务所需的技巧。</p>
+<p>基于容器技术的微服务架构，运维人员和DBA 深度优化基础服务，封装镜像，将容器和数据库的使用能力交与业务团队，消除服务器环境和数据库对于业务的束缚，让业务团队高速自我迭代。</p>
+<p><img src="https://martinfowler.com/articles/microservices/images/PreferFunctionalStaffOrganization.png" alt="microservices"></p>
+<h2 id="交付产品而非项目"><a href="#交付产品而非项目" class="headerlink" title="交付产品而非项目"></a>交付产品而非项目</h2><p>交付可运行的产品，而不是项目代码。</p>
+<p>团队开发时，常常以完成项目的一个模块为目标，完成后则交给运维团队。</p>
+<p>微服务架构下，团队负责产品的全部生命周期。例如在亚马逊，团队文化有句名言：“You build, you run it”，开发团队对生产环境的服务也要负责。更进一步的，团队应该增加与用户的交流，承担一些用户支持，不再只是完成一堆功能，团队心态变为与业务能力紧紧相连。</p>
+<h2 id="智能端点与哑管道"><a href="#智能端点与哑管道" class="headerlink" title="智能端点与哑管道"></a>智能端点与哑管道</h2><p>服务作为智能终端，所有的业务智能逻辑在服务内部处理。服务之间通过轻量级协议沟通，首先推荐基于 HTTP Restful API 的通讯方式，其次推荐轻量级的消息服务，如 RabbitMQ。</p>
+<h2 id="去中心化的治理"><a href="#去中心化的治理" class="headerlink" title="去中心化的治理"></a>去中心化的治理</h2><p>单体应用往往倾向于采用单一技术平台，微服务架构则鼓励使用合适的工具完成各自的任务，每个微服务可以考虑选用最佳工具完成(如不同的编程语言)。微服务的技术标准倾向于寻找其他开发者已成功验证解决类似问题的技术。</p>
+<h2 id="去中心化的存储"><a href="#去中心化的存储" class="headerlink" title="去中心化的存储"></a>去中心化的存储</h2><p>微服务架构倡导采用多样性持久化的方法，让每个微服务管理其自有数据库，并允许不同微服务采用不同的数据持久化技术。</p>
+<h2 id="自动化运维"><a href="#自动化运维" class="headerlink" title="自动化运维"></a>自动化运维</h2><p>云化及自动化部署等技术极大地降低了微服务构建、部署和运维的难度，通过应用持续集成和持续交付等方法有助于达到加速推出市场的目的。</p>
+<h2 id="容错"><a href="#容错" class="headerlink" title="容错"></a>容错</h2><p>微服务架构所带来的一个后果是必须考虑每个服务的失败容错机制。因此，微服务非常重视建立架构及业务相关指标的实时监控和日志机制。</p>
+<h2 id="快速演化"><a href="#快速演化" class="headerlink" title="快速演化"></a>快速演化</h2><p>微服务应用更注重快速更新，因此系统的计会随时间不断变化及演进。如在某微服务应用中，可替代性模块化设计的基本原则，在实施后发现某两个微服务经常必须同时更新，则这很可能意味着应将其合并为一个微服务。</p>
+<h1 id="微服务和-SOA-的关系"><a href="#微服务和-SOA-的关系" class="headerlink" title="微服务和 SOA 的关系"></a>微服务和 SOA 的关系</h1><p>微服务是否仅仅是十多年前所看到的“面向服务的架构(SOA)”？这样问是有道理的，因为微服务风格非常类似于一些支持SOA的人所赞成的观点。然而，问题在于SOA这个词意味着太多不同的东西。而且大多数时候，我们所遇到的某些被称作”SOA”的事物，它们通常专注于ESB，来集成各个单块应用。</p>
+<p>特别地，我们已经看到如此之多的面向服务的拙劣实现——从将系统复杂性隐藏于ESB中的趋势，到花费数百万进行多年却没有交付任何价值的失败项目，到顽固抑制变化发生的中心化技术治理模型——以至于有时觉得其所造成的种种问题真的不堪回首。</p>
+<p>当然，在微服务社区投入使用的许多技术，源自各个开发人员将各种服务集成到各个大型组织的经验。“容错读取”模式就是这样一个例子。对于Web的广泛使用，使得人们不再使用一些中心化的标准，而使用一些简单的协议。坦率地讲，这些中心化的标准，其复杂性已经达到令人吃惊的程度。</p>
+<p>这种常见的SOA表现，已使得一些微服务的倡导者完全拒绝将自己贴上SOA的标签。尽管其他人会将微服务看作是SOA的一种形式，也许微服务就是以正确的形式来实现面向服务的SOA。不管是哪种情况，SOA意味着如此之多的不同事物，这表明用一个更加干净利落的术语来命名这种架构风格是很有价值的。</p>
+<p>结论：微服务是继承 SOA 意志的架构风格，区别如下表:</p>
+<table>
+<thead>
+<tr>
+<th>SOA</th>
+<th>微服务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集中管控，异构应用的服务化</td>
+<td>服务自治，功能单一独立</td>
+</tr>
+<tr>
+<td>复杂的 web service、bpm、esb 实现方式</td>
+<td>轻量级的 HTTP 协议或消息协议</td>
+</tr>
+</tbody>
+</table>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://martinfowler.com/articles/microservices.html" target="_blank" rel="noopener">微服务介绍</a> 来自 Martin Fowler</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/microservices/" rel="tag"># microservices</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/26/network-basic-md/" rel="next" title="网络 - 基础">
+                <i class="fa fa-chevron-left"></i> 网络 - 基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="https://avatars1.githubusercontent.com/u/1199714?v=3&s=460" alt="Louis Liu">
+          <p class="site-author-name" itemprop="name">Louis Liu</p>
+           
+              <p class="site-description motion-element" itemprop="description">活在路上</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/louis813" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/et861" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#特征"><span class="nav-number">2.</span> <span class="nav-text">特征</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务组件化"><span class="nav-number">2.1.</span> <span class="nav-text">服务组件化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组织架构围绕业务"><span class="nav-number">2.2.</span> <span class="nav-text">组织架构围绕业务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交付产品而非项目"><span class="nav-number">2.3.</span> <span class="nav-text">交付产品而非项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#智能端点与哑管道"><span class="nav-number">2.4.</span> <span class="nav-text">智能端点与哑管道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#去中心化的治理"><span class="nav-number">2.5.</span> <span class="nav-text">去中心化的治理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#去中心化的存储"><span class="nav-number">2.6.</span> <span class="nav-text">去中心化的存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动化运维"><span class="nav-number">2.7.</span> <span class="nav-text">自动化运维</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容错"><span class="nav-number">2.8.</span> <span class="nav-text">容错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速演化"><span class="nav-number">2.9.</span> <span class="nav-text">快速演化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#微服务和-SOA-的关系"><span class="nav-number">3.</span> <span class="nav-text">微服务和 SOA 的关系</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Louis Liu</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://springmarch.com/2018/01/22/microservices-basic/';
+          this.page.identifier = '2018/01/22/microservices-basic/';
+          this.page.title = '微服务 - 概念';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://springmarchcom.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
