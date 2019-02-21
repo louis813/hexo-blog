@@ -77,5 +77,5 @@ theme: next
 deploy:
     type: git
     repo: louis@47.75.249.37:/opt/website/hexo-blog
-    branch: master          
+    branch: master
     message: 提交的信息 
