@@ -75,7 +75,7 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-    type: git
-    repo: louis@47.75.249.37:/opt/website/blog-deploy.git
-    branch: master
-    message: 提交的信息 
+    type: rsync
+    host: 47.75.249.37
+    user: louis
+    root: /opt/website/hexo-rsync/
