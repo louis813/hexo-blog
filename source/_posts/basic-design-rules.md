@@ -15,6 +15,7 @@ tags: design
 * CQS
 * CQRS
 * DDD
+* 12-Factor
 
 ## SOLID
 在程序设计领域， SOLID（**单一功能、开闭原则、里氏替换、接口隔离以及依赖反转**）是由罗伯特·C·马丁在21世纪早期引入的记忆术首字母缩略字，指代了面向对象编程和面向对象设计的五个基本原则。当这些原则被一起应用时，它们使得一个程序员开发一个容易进行软件维护和扩展的系统变得更加可能。SOLID所包含的原则是通过引发编程者进行软件源代码的代码重构进行软件的代码异味清扫，从而使得软件清晰可读以及可扩展时可以应用的指南。
@@ -69,9 +70,63 @@ CQRS 让读模型和写模型完全分离，因此可以对读操作和写操作
 
 TBC
 
+## 12-Factor
+
+12-Factor，是由 Heroku 创始人 Adam Wiggins 首次提出并开源，并由众多经验丰富的开发者共同完善，这综合了他们关于 SaaS 应用几乎所有的经验和智慧，是开发此类应用的理想实践标准。
+
+如今，软件通常会作为一种服务来交付，它们被称为网络应用程序，或软件即服务（SaaS）。12-Factor 为构建如下的 SaaS 应用提供了方法论：
+
+* 使用标准化流程自动配置，从而使新的开发者花费最少的学习成本加入这个项目。
+* 和操作系统之间尽可能的划清界限，在各个系统中提供最大的可移植性。
+* 适合部署在现代的云计算平台，从而在服务器和系统管理方面节省资源。
+* 将开发环境和生产环境的差异降至最低，并使用持续交付实施敏捷开发。
+* 可以在工具、架构和开发流程不发生明显变化的前提下实现扩展。
+
+这套理论适用于任意语言和后端服务（数据库、消息队列、缓存等）开发的应用程序。
+
+12-Factors：
+
+I. 基准代码
+一份基准代码，多份部署
+
+II. 依赖
+显式声明依赖关系
+
+III. 配置
+在环境中存储配置
+
+IV. 后端服务
+把后端服务当作附加资源
+
+V. 构建，发布，运行
+严格分离构建和运行
+
+VI. 进程
+以一个或多个无状态进程运行应用
+
+VII. 端口绑定
+通过端口绑定提供服务
+
+VIII. 并发
+通过进程模型进行扩展
+
+IX. 易处理
+快速启动和优雅终止可最大化健壮性
+
+X. 开发环境与线上环境等价
+尽可能的保持开发，预发布，线上环境相同
+
+XI. 日志
+把日志当作事件流
+
+XII. 管理进程
+后台管理任务当作一次性进程运行
+
+
 # 参考
 
 [CQRS - Martin Fowler](https://martinfowler.com/bliki/CQRS.html)
 [正交设计，OO 与 SOLID - InfoQ](https://www.infoq.cn/article/orthogonal-design-oo-and-solid)
 [使用聚合、事件溯源和 CQRS 开发事务型微服务 - InfoQ](https://www.infoq.cn/article/microservices-aggregates-events-cqrs-part-1-richardson)
 [在微服务中应用简化后的 CQRS 和 DDD 模式 - Microsoft](https://docs.microsoft.com/zh-cn/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/apply-simplified-microservice-cqrs-ddd-patterns)
+[The Twelve-Factor App](https://12factor.net/zh_cn/)
